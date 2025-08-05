@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Course Video</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eef2f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    #player {
+      border-radius: 12px;
+      width: 90%;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+    }
+
+    progress {
+      width: 90%;
+      max-width: 900px;
+      height: 20px;
+      margin-top: 15px;
+    }
+
+    a {
+      margin-top: 20px;
+      text-decoration: none;
+      color: #0072ff;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="courseTitle">Loading Video...</h1>
+  <div id="player"></div>
+  <progress id="videoProgress" value="0" max="100"></progress>
+  <a href="index.html">← Back to Courses</a>
+
+  <!-- YouTube IFrame API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const course = params.get("course");
+
+    const videoLinks = {
+      "Web Development": "Q33KBiDriJY",
+      "Data Science": "-ETQ97mXXF0",
+      "Graphic Design": "GQS7wPujL2k",
+      "Photography": "yhAmMUi2NmM",
+      "Digital Marketing": "nkNHn0VqVBA",
+      "UI/UX Design": "x3dQsMkJgDg"
+    };
+
+    let player;
+    let videoId = videoLinks[course];
+    let progressBar = document.getElementById("videoProgress");
+
+    document.getElementById("courseTitle").textContent = course
+      ? `${course} - Video Lesson`
+      : "Course Not Found";
+
+    // YouTube API Callback
+    function onYouTubeIframeAPIReady() {
+      if (!videoId) return;
+      player = new YT.Player('player', {
+        videoId: videoId,
+        playerVars: { 'rel': 0 },
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      });
+    }
+
+    // When player is ready
+    function onPlayerReady(event) {
+      // Load previous progress
+      const saved = localStorage.getItem(`${course}-progress`);
+      if (saved && !isNaN(saved)) {
+        progressBar.value = parseFloat(saved);
+      }
+
+      // Start tracking
+      setInterval(updateProgress, 1000);
+    }
+
+    // On state change
+    function onPlayerStateChange(event) {
+      if (event.data == YT.PlayerState.PLAYING) {
+        updateProgress();
+      }
+    }
+
+    // Track progress
+    function updateProgress() {
+      if (player && player.getDuration) {
+        const duration = player.getDuration();
+        const current = player.getCurrentTime();
+        const percent = (current / duration) * 100;
+
+        if (!isNaN(percent)) {
+          progressBar.value = percent.toFixed(2);
+          localStorage.setItem(`${course}-progress`, percent.toFixed(2));
+        }
+      }
+    }
+
+    // Expose globally
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+  </script>
+</body>
+</html>
