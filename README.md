@@ -2,18 +2,6 @@
 
 ### THE FRONT-END FOR AN ELEARNING PLATFORM WITH FEATURES LIKE COURSE LISTING, PROGRESS TRACKING, AND VIDEO EMBEDDING.
 
-COMPANY: CODTECH IT SOLUTIONS
-
-NAME: MUGESH M
-
-INTERN ID: CT04DH732
-
-DOMAIN: FRONT END DEVELOPMENT
-
-DURATION: 4 WEEEKS
-
-MENTOR: NEELA SANTOSH
-
 DESCRIPTION:This project is a front-end design for an E-Learning Platform built using HTML and CSS. The main goal of this platform is to provide users with a simple, colorful, and engaging interface to explore online courses, track learning progress, and watch educational videos. The design is fully responsive and visually attractive, featuring rich background images, modern layouts, and interactive sections. It aims to simulate a real-world online learning portal experience with a focus on user-friendly navigation and accessibility. The platform is divided into four main pages — Home (Landing), Courses, Progress Tracking, and Video Embedding — each serving a unique purpose in the user journey.
 The Landing Page (index.html) is designed with a vibrant background image and bold typography to immediately grab the user's attention. It includes a header section with navigation links and a central hero section with a welcome message, promotional text, and a call-to-action button that leads users to the course listings. This page serves as the first impression and sets the tone for the entire platform with colorful visuals and a motivational learning message. The design uses a linear gradient and a background image overlay to give a sleek and modern appearance.
 The Course Listing Page (courses.html) displays multiple course cards in a responsive grid layout. Each card features an image, course title, and a brief description to help users quickly identify which course suits them best. This section is designed with a clean white background and subtle shadows to keep the focus on the content. The layout encourages users to explore more by presenting courses in an organized and visually pleasant format. You can add more courses by simply duplicating the course block structure in HTML.
